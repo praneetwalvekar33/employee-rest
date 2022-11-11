@@ -24,7 +24,7 @@ public class EmployeeDaoImplementation implements EmployeeDao{
 
 	@Override
 	@Transactional
-	public List<EmployeeEntity> getEmployees() {
+	public List<EmployeeEntity> getAllEmployees() {
 		Session currentSession=entityManager.unwrap(Session.class);
 		
 		Query<EmployeeEntity> theQuery=currentSession.createQuery("from EmployeeEntity", EmployeeEntity.class); 
@@ -33,6 +33,16 @@ public class EmployeeDaoImplementation implements EmployeeDao{
 
 		
 		return employeesList;
+	}
+
+	@Override
+	@Transactional
+	public EmployeeEntity getEmployee(int id) {
+		Session currentSession=entityManager.unwrap(Session.class);
+		
+		EmployeeEntity employee=currentSession.get(EmployeeEntity.class,id);
+		
+		return employee;
 	}
 	
 	

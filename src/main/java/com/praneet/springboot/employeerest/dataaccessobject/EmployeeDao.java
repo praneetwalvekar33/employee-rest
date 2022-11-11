@@ -6,6 +6,8 @@ import com.praneet.springboot.employeerest.entity.EmployeeEntity;
 
 public interface EmployeeDao {
 	
-	public List<EmployeeEntity> getEmployees();
+	public List<EmployeeEntity> getAllEmployees();
+	
+	public EmployeeEntity getEmployee(int id);
 
 }
