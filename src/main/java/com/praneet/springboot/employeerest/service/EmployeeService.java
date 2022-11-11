@@ -7,5 +7,7 @@ import com.praneet.springboot.employeerest.entity.EmployeeEntity;
 public interface EmployeeService {
 	
 	public List<EmployeeEntity> getAllEmployees();
+	
+	public EmployeeEntity getEmployee(int id);
 
 }
