@@ -8,7 +8,6 @@ import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.praneet.springboot.employeerest.entity.EmployeeEntity;
 
@@ -23,7 +22,6 @@ public class EmployeeDaoImplementation implements EmployeeDao{
 	}
 
 	@Override
-	@Transactional
 	public List<EmployeeEntity> getAllEmployees() {
 		Session currentSession=entityManager.unwrap(Session.class);
 		
@@ -36,7 +34,14 @@ public class EmployeeDaoImplementation implements EmployeeDao{
 	}
 
 	@Override
-	@Transactional
+	public void addEmployee(EmployeeEntity employee) {
+		
+		Session currentSession=entityManager.unwrap(Session.class);
+		
+		currentSession.saveOrUpdate(employee);
+	}
+
+	@Override
 	public EmployeeEntity getEmployee(int id) {
 		Session currentSession=entityManager.unwrap(Session.class);
 		
