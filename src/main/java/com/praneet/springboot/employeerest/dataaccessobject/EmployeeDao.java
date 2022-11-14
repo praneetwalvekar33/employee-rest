@@ -11,5 +11,7 @@ public interface EmployeeDao {
 	public EmployeeEntity getEmployee(int id);
 	
 	public void addEmployee(EmployeeEntity employee);
+	
+	public void deleteEmployee(int id);
 
 }

@@ -50,7 +50,18 @@ public class EmployeeDaoImplementation implements EmployeeDao{
 		return employee;
 	}
 	
-	
+	@Override
+	public void deleteEmployee(int id) {
+		
+		Session currentSession=entityManager.unwrap(Session.class);
+		
+		Query queryDelete=currentSession.createQuery("delete from EmployeeEntity where id=:employeeId");
+		
+		queryDelete.setParameter("employeeId",id);
+		
+		queryDelete.executeUpdate();
+		
+	}
 	
 	
 }
