@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.praneet.springboot.employeerest.ErroHandling.EmployeeNotFoundException;
 import com.praneet.springboot.employeerest.entity.EmployeeEntity;
 import com.praneet.springboot.employeerest.service.EmployeeService;
 
@@ -33,6 +34,10 @@ public class EmployeeController {
 	public EmployeeEntity getEmployee(@PathVariable int employeeId) {
 		EmployeeEntity employee=employeeService.getEmployee(employeeId);
 		
+		if(employee==null) {
+			throw new EmployeeNotFoundException("Employee not found for Id: "+employeeId);
+		}
+		
 		return employee;
 	}
 	
@@ -47,6 +52,12 @@ public class EmployeeController {
 	
 	@DeleteMapping("/employees/{employeeId}")
 	public String deleteEmployee(@PathVariable int employeeId) {
+		
+		EmployeeEntity employee=employeeService.getEmployee(employeeId);
+		
+		if(employee==null) {
+			throw new EmployeeNotFoundException("Employee not found for Id: "+ employeeId);
+		}
 		employeeService.deleteEmployee(employeeId);
 		
 		return "Successfully deleted employee with ID: "+ employeeId;
@@ -54,6 +65,7 @@ public class EmployeeController {
 	
 	@PutMapping("/employees")
 	public String updateEmployee(@RequestBody EmployeeEntity employee) {
+		
 		employeeService.addEmployee(employee);
 		
 		return "Successfully added employee for id: " + employee.getId();
